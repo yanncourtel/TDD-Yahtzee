@@ -2,11 +2,11 @@ namespace Yahtzee
 {
     public class Dice
     {
-        public int DiceValue { get; }
+        public int Value { get; }
 
         public Dice(int dice)
         {
-            DiceValue = dice;
+            Value = dice >= 1 && dice <= 6 ? dice : throw new InvalidDiceException("A dice value must be between one and six");
         }
     }
 }
