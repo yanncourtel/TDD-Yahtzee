@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using FluentAssertions;
 using Xunit;
@@ -22,6 +23,31 @@ namespace Tests
             // assert
             result.Should().Be(expectedScore);
         }
+
+        [Fact]
+        public void Calculate_With_Invalid_Combination_Throws_Exception()
+        {
+            // arrange 
+            var calculator = new Calculator();
+            var dices = new int[] { 1,1,1,1,1};
+            
+            // act
+            // assert
+            calculator.Invoking(x => x.Calculate(dices, (Combination) 100))
+                .Should().Throw<ArgumentOutOfRangeException>();
+        }
+        
+        [Fact]
+        public void Calculate_With_Null_Dices_Throws_Exception()
+        {
+            // arrange 
+            var calculator = new Calculator();
+            
+            // act
+            // assert
+            calculator.Invoking(x => x.Calculate(null, Combination.Ones))
+                .Should().Throw<ArgumentNullException>();
+        }
     }
 
     public enum Combination
@@ -38,7 +64,7 @@ namespace Tests
             {
                 Combination.Ones => dices.Where(x => x == 1).Sum(),
                 Combination.Twos => dices.Where(x => x == 2).Sum(),
-                _ => dices.Where(x => x == 1).Sum()
+                _ => throw new ArgumentOutOfRangeException()
             };
         }
     }
