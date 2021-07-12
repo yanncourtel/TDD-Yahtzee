@@ -6,31 +6,21 @@ namespace Tests
 {
     public class CalculatorShould
     {
-        [Fact] 
-        public void Calculate_Given_11111_For_Ones_A_Score_5()
+        [Theory] 
+        [InlineData(1,1,1,1,1,Combination.Ones,5)]
+        [InlineData(1,1,1,1,2,Combination.Ones,4)]
+        [InlineData(1,1,1,1,2,Combination.Twos,2)]
+        public void Calculate_Given_Dices_For_Combination_The_Expected_Score(int dice1,int dice2,int dice3,int dice4,int dice5, Combination combination, int expectedScore)
         {
+            // arrange 
             var calculator = new Calculator();
-            var dices = new int[] { 1,1,1,1,1};
-            var result = calculator.Calculate(dices, Combination.Ones);
-            result.Should().Be(5);
-        }
-
-        [Fact]
-        public void Calculate_Given_11112_For_Ones_A_Score_4()
-        {
-            var calculator = new Calculator();
-            var dices = new int[] { 1, 1, 1, 1, 2 };
-            var result = calculator.Calculate(dices, Combination.Ones);
-            result.Should().Be(4);
-        }
-
-        [Fact]
-        public void Calculate_Given_11112_For_Twos_A_Score_2()
-        {
-            var calculator = new Calculator();
-            var dices = new int[] { 1, 1, 1, 1, 2 };
-            var result = calculator.Calculate(dices, Combination.Twos);
-            result.Should().Be(2);
+            var dices = new int[] { dice1,dice2,dice3,dice4,dice5};
+            
+            // act
+            var result = calculator.Calculate(dices, combination);
+            
+            // assert
+            result.Should().Be(expectedScore);
         }
     }
 
@@ -44,7 +34,12 @@ namespace Tests
     {
         public int Calculate(int[] dices, Combination combination)
         {
-            return dices.Where(x => x == 1).Sum();
+            return combination switch
+            {
+                Combination.Ones => dices.Where(x => x == 1).Sum(),
+                Combination.Twos => dices.Where(x => x == 2).Sum(),
+                _ => dices.Where(x => x == 1).Sum()
+            };
         }
     }
 }
