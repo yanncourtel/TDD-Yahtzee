@@ -36,5 +36,33 @@ namespace Tests
                 .WithMessage("A roll must have 5 dices");
 
         }
+        
+        [Fact]
+        public void Not_Have_More_Than_5_Dices()
+        {
+            // arrange
+            var dices = new Dice[] {new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1)};
+            
+            // act
+            Action result = ()=> new Roll(dices);
+            
+            // assert
+            result.Should().Throw<InvalidRollException>()
+                .WithMessage("A roll must have 5 dices");
+
+        }
+        
+        [Fact]
+        public void Not_Have_Null_Dices()
+        {
+            // arrange
+            
+            // act
+            Action result = ()=> new Roll(null);
+            
+            // assert
+            result.Should().Throw<ArgumentNullException>();
+
+        }
     }
 }
