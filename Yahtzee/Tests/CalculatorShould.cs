@@ -1,3 +1,4 @@
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -9,29 +10,41 @@ namespace Tests
         public void Calculate_Given_11111_For_Ones_A_Score_5()
         {
             var calculator = new Calculator();
-            var result = calculator.Calculate(1, 1, 1, 1, 1, Combination.Ones);
+            var dices = new int[] { 1,1,1,1,1};
+            var result = calculator.Calculate(dices, Combination.Ones);
             result.Should().Be(5);
         }
-        
-        [Fact] 
+
+        [Fact]
         public void Calculate_Given_11112_For_Ones_A_Score_4()
         {
             var calculator = new Calculator();
-            var result = calculator.Calculate(1, 1, 1, 1, 2, Combination.Ones);
+            var dices = new int[] { 1, 1, 1, 1, 2 };
+            var result = calculator.Calculate(dices, Combination.Ones);
             result.Should().Be(4);
+        }
+
+        [Fact]
+        public void Calculate_Given_11112_For_Twos_A_Score_2()
+        {
+            var calculator = new Calculator();
+            var dices = new int[] { 1, 1, 1, 1, 2 };
+            var result = calculator.Calculate(dices, Combination.Twos);
+            result.Should().Be(2);
         }
     }
 
     public enum Combination
     {
-        Ones
+        Ones,
+        Twos
     }
 
     public class Calculator
     {
-        public int Calculate(int dice1, int dice2, int dice3, int dice4, int dice5, Combination combination)
+        public int Calculate(int[] dices, Combination combination)
         {
-            return 5;
+            return dices.Where(x => x == 1).Sum();
         }
     }
 }
