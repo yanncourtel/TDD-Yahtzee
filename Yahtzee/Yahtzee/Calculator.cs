@@ -18,5 +18,11 @@ namespace Yahtzee
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
+
+        public int Calculate(Dice[] dices, Combination combination)
+        {
+            var dicesValues = dices.Select(x => x.DiceValue).ToArray();
+            return Calculate(dicesValues, combination);
+        }
     }
 }
