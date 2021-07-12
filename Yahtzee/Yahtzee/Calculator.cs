@@ -19,9 +19,9 @@ namespace Yahtzee
             };
         }
 
-        public int Calculate(Dice[] dices, Combination combination)
+        public int Calculate(Roll roll, Combination combination)
         {
-            var dicesValues = dices.Select(x => x.Value).ToArray();
+            var dicesValues = roll.Dices.Select(x => x.Value).ToArray();
             return Calculate(dicesValues, combination);
         }
     }
