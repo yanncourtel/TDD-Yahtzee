@@ -25,6 +25,40 @@ namespace Tests
             // assert
             score.Should().Be(expectedScore);
         }
+
+        [Fact]
+        public void Get_Default_Score_For_A_Given_Combination()
+        {
+            // arrange
+            var scoreGrid = new ScoreGrid();
+            var combination = Combination.Ones;
+            var expectedScore = 0;
+
+            // act
+            var score = scoreGrid.GetScore(combination);
+
+            // assert
+            score.Should().Be(expectedScore);
+        }
+
+        [Fact]
+        public void Save_Score_For_A_Given_Combination()
+        {
+            // arrange
+            var scoreGrid = new ScoreGrid();
+            var dices = new Dice[]
+                {new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1)};
+            var roll = new Roll(dices);
+            var combination = Combination.Yahtzee;
+            var expectedScore = 50;
+
+            // act
+            scoreGrid.SaveScore(roll,combination);
+
+            // assert
+            scoreGrid.Total.Should().Be(expectedScore);
+        }
+
     }
 
     public class ScoreGrid
@@ -34,9 +68,21 @@ namespace Tests
         {
         }
 
+        public int Total { get; }
+
         public int PrintTemporaryScore(Roll roll, Combination combination)
         {
             return Calculator.Calculate(roll,combination);
+        }
+
+        public int GetScore(Combination combination)
+        {
+            return 0;
+        }
+
+        public void SaveScore(Roll roll, Combination combination)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
