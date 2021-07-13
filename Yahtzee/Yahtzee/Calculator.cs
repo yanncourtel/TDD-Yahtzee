@@ -12,6 +12,7 @@ namespace Yahtzee
             {
                 throw new ArgumentNullException();
             }
+
             var dicesValues = roll.GetDicesValues();
 
             return combination switch
@@ -24,14 +25,23 @@ namespace Yahtzee
                 Combination.Sixes => dicesValues.Where(x => x == 6).Sum(),
                 Combination.Chance => dicesValues.Sum(),
                 Combination.LargeStraight => IsLargeStraight(dicesValues) ? 40 : 0,
+                Combination.SmallStraight => IsSmallStraight(dicesValues) ? 30 : 0,
+                Combination.Yahtzee => dicesValues.Count(x => x == dicesValues[0]) == 5 ? 50 : 0,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private static bool IsLargeStraight(int[] dicesValues)
+        private bool IsSmallStraight(int[] dicesValues)
+        {
+            return dicesValues.Intersect(new int[] {1, 2, 3, 4}).Count() == 4 ||
+                   dicesValues.Intersect(new int[] {2, 3, 4, 5}).Count() == 4 ||
+                   dicesValues.Intersect(new int[] {3, 4, 5, 6}).Count() == 4;
+        }
+
+        private bool IsLargeStraight(int[] dicesValues)
         {
             return dicesValues.Intersect(new int[] {1, 2, 3, 4, 5}).Count() == 5 ||
-                   dicesValues.Intersect(new int[] {6, 2, 3, 4, 5}).Count() == 5;
+                   dicesValues.Intersect(new int[] {2, 3, 4, 5, 6}).Count() == 5;
         }
     }
 }

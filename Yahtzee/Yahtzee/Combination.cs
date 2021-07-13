@@ -10,6 +10,8 @@ namespace Yahtzee
         Sixes,
         Chance,
         LargeStraight,
-        SmallStraight
+        SmallStraight,
+        Yahtzee,
+        Square
     }
 }
