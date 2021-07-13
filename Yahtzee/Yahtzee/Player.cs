@@ -13,7 +13,7 @@
 
         public Roll RollDice()
         {
-            throw new System.NotImplementedException();
+            return diceLauncher.Generate();
         }
 
         public void ChooseScore(Roll roll, Combination yahtzee)
