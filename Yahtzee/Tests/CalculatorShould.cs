@@ -16,9 +16,10 @@ namespace Tests
             var roll = new Roll(dices);
 
             // act
+            Action result = ()=> Calculator.Calculate(roll,(Combination) 100);
+            
             // assert
-            calculator.Invoking(x => x.Calculate(roll, (Combination) 100))
-                .Should().Throw<ArgumentOutOfRangeException>();
+            result.Should().Throw<ArgumentOutOfRangeException>();
         }
 
         [Fact]
@@ -28,9 +29,10 @@ namespace Tests
             var calculator = new Calculator();
 
             // act
+            Action result = ()=> Calculator.Calculate(null,Combination.Ones);
+            
             // assert
-            calculator.Invoking(x => x.Calculate(null, Combination.Ones))
-                .Should().Throw<ArgumentNullException>();
+            result.Should().Throw<ArgumentNullException>();
         }
 
         [Theory]
@@ -70,13 +72,12 @@ namespace Tests
             int dice5, Combination combination, int expectedScore)
         {
             // arrange 
-            var calculator = new Calculator();
             var dices = new Dice[]
                 {new Dice(dice1), new Dice(dice2), new Dice(dice3), new Dice(dice4), new Dice(dice5)};
             var roll = new Roll(dices);
 
             // act
-            var result = calculator.Calculate(roll, combination);
+            var result = Calculator.Calculate(roll, combination);
 
             // assert
             result.Should().Be(expectedScore);
