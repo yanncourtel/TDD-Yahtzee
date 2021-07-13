@@ -3,6 +3,10 @@ namespace Yahtzee
     public enum Combination
     {
         Ones,
-        Twos
+        Twos,
+        Threes,
+        Fours,
+        Fives,
+        Sixes
     }
 }

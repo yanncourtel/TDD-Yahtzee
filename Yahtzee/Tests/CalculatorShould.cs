@@ -37,6 +37,10 @@ namespace Tests
         [InlineData(1, 1, 1, 1, 1, Combination.Ones, 5)]
         [InlineData(1, 1, 1, 1, 2, Combination.Ones, 4)]
         [InlineData(1, 1, 1, 1, 2, Combination.Twos, 2)]
+        [InlineData(1, 1, 1, 1, 3, Combination.Threes, 3)]
+        [InlineData(1, 1, 1, 1, 4, Combination.Fours, 4)]
+        [InlineData(1, 1, 1, 1, 5, Combination.Fives, 5)]
+        [InlineData(1, 1, 1, 1, 6, Combination.Sixes, 6)]
         public void Calculate_Given_Roll_For_Combination_The_Expected_Score(int dice1, int dice2, int dice3, int dice4,
             int dice5, Combination combination, int expectedScore)
         {

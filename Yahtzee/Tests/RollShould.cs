@@ -71,11 +71,12 @@ namespace Tests
             // arrange
             var dices = new Dice[] {new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1)};
             var roll = new Roll(dices);
-
+            int[] expected = new int[] {1,1,1,1,1 };
             // act
-            var result = roll.GetDicesValues();
+            int[] result = roll.GetDicesValues();
             // assert
-            result.Should().Be(expected);
+            
+            result.Should().Equal(expected);
         }
 
     }

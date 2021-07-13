@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Yahtzee
 {
@@ -8,10 +9,15 @@ namespace Yahtzee
         {
             if (dices == null)
                 throw new ArgumentNullException(nameof(dices));
-            
+
             Dices = dices.Length == 5 ? dices : throw new InvalidRollException();
         }
 
         public Dice[] Dices { get; set; }
+
+        public int[] GetDicesValues()
+        {
+            return Dices.Select(x => x.Value).ToArray();
+        }
     }
 }

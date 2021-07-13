@@ -11,12 +11,16 @@ namespace Yahtzee
             {
                 throw new ArgumentNullException();
             }
-            var dicesValues = roll.Dices.Select(x => x.Value).ToArray();
+            var dicesValues = roll.GetDicesValues();
             
             return combination switch
             {
                 Combination.Ones => dicesValues.Where(x => x == 1).Sum(),
                 Combination.Twos => dicesValues.Where(x => x == 2).Sum(),
+                Combination.Threes => dicesValues.Where(x => x == 3).Sum(),
+                Combination.Fours => dicesValues.Where(x => x == 4).Sum(),
+                Combination.Fives => dicesValues.Where(x => x == 5).Sum(),
+                Combination.Sixes => dicesValues.Where(x => x == 6).Sum(),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
