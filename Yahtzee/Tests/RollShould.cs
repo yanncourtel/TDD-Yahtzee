@@ -64,5 +64,19 @@ namespace Tests
             result.Should().Throw<ArgumentNullException>();
 
         }
+
+        [Fact]
+        public void Return_Dice_Values()
+        {
+            // arrange
+            var dices = new Dice[] {new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1)};
+            var roll = new Roll(dices);
+
+            // act
+            var result = roll.GetDicesValues();
+            // assert
+            result.Should().Be(expected);
+        }
+
     }
 }
