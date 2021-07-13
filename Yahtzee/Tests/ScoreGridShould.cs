@@ -1,5 +1,7 @@
 using FluentAssertions;
+
 using Xunit;
+
 using Yahtzee;
 
 namespace Tests
@@ -41,23 +43,23 @@ namespace Tests
             score.Should().Be(expectedScore);
         }
 
-        [Fact]
-        public void Save_Score_For_A_Given_Combination()
-        {
-            // arrange
-            var scoreGrid = new ScoreGrid();
-            var dices = new Dice[]
-                {new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1)};
-            var roll = new Roll(dices);
-            var combination = Combination.Yahtzee;
-            var expectedScore = 50;
+        //[Fact]
+        //public void Save_Score_For_A_Given_Combination()
+        //{
+        //    // arrange
+        //    var scoreGrid = new ScoreGrid();
+        //    var dices = new Dice[]
+        //        {new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1)};
+        //    var roll = new Roll(dices);
+        //    var combination = Combination.Yahtzee;
+        //    var expectedScore = 50;
 
-            // act
-            scoreGrid.SaveScore(roll,combination);
+        //    // act
+        //    scoreGrid.SaveScore(roll,combination);
 
-            // assert
-            scoreGrid.Total.Should().Be(expectedScore);
-        }
+        //    // assert
+        //    scoreGrid.Total.Should().Be(expectedScore);
+        //}
 
     }
 
@@ -72,7 +74,7 @@ namespace Tests
 
         public int PrintTemporaryScore(Roll roll, Combination combination)
         {
-            return Calculator.Calculate(roll,combination);
+            return Calculator.Calculate(roll, combination);
         }
 
         public int GetScore(Combination combination)
