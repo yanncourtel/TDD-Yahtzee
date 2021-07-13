@@ -53,6 +53,8 @@ namespace Tests
         [InlineData(1, 1, 1, 1, 1, Combination.Yahtzee, 50)]
         [InlineData(1, 1, 1, 1, 2, Combination.Yahtzee, 0)]
         [InlineData(1, 1, 1, 1, 2, Combination.Square, 6)]
+        [InlineData(1, 1, 2, 3, 2, Combination.Square, 0)]
+        [InlineData(1, 1, 1, 2, 2, Combination.Square, 0)]
         public void Calculate_Given_Roll_For_Combination_The_Expected_Score(int dice1, int dice2, int dice3, int dice4,
             int dice5, Combination combination, int expectedScore)
         {

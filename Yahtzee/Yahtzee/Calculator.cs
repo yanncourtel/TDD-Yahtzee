@@ -27,8 +27,14 @@ namespace Yahtzee
                 Combination.LargeStraight => IsLargeStraight(dicesValues) ? 40 : 0,
                 Combination.SmallStraight => IsSmallStraight(dicesValues) ? 30 : 0,
                 Combination.Yahtzee => dicesValues.Count(x => x == dicesValues[0]) == 5 ? 50 : 0,
+                Combination.Square => HasFourOccurrences(dicesValues) ? dicesValues.Sum():0,
                 _ => throw new ArgumentOutOfRangeException()
             };
+        }
+
+        private bool HasFourOccurrences(int[] dicesValues)
+        {
+            return dicesValues.GroupBy(x=>x).Any(x=>x.Count()>=4);
         }
 
         private bool IsSmallStraight(int[] dicesValues)
