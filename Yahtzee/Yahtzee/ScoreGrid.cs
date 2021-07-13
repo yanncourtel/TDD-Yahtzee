@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,7 +6,7 @@ namespace Yahtzee
 {
     public class ScoreGrid
     {
-        private readonly Dictionary<Combination,int> _scores;
+        private readonly Dictionary<Combination, int> _scores;
 
         public ScoreGrid()
         {
@@ -26,8 +27,10 @@ namespace Yahtzee
 
         public void SaveScore(Roll roll, Combination combination)
         {
-            _scores[combination] = PrintTemporaryScore(roll, combination);
+            if (_scores.ContainsKey(combination))
+                throw new InvalidOperationException("Scoring twice in the same combination is not permitted");
             
+            _scores[combination] = PrintTemporaryScore(roll, combination);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using Xunit;
 using Yahtzee;
@@ -78,22 +79,23 @@ namespace Tests
         }
         
         [Fact]
-        public void Get_Score_Twice_For_A_Given_Combination()
+        public void Save_Score_Twice_For_A_Given_Combination()
         {
             // arrange
             var scoreGrid = new ScoreGrid();
             var dices = new Dice[] {new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1)};
             var roll = new Roll(dices);
             var combination = Combination.Ones;
-            var expectedScore = 0;
+            
             scoreGrid.SaveScore(roll,combination);
-            scoreGrid.SaveScore(roll,combination);
-
+            
             // act
             var score = scoreGrid.GetScore(combination);
 
             // assert
-            score.Should().Be(expectedScore);
+            scoreGrid.Invoking(x=>x.SaveScore(roll,combination))
+                .Should().Throw<InvalidOperationException>()
+                .WithMessage("Scoring twice in the same combination is not permitted");
         }
     }
 }
