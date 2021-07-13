@@ -7,6 +7,8 @@ namespace Yahtzee
         Threes,
         Fours,
         Fives,
-        Sixes
+        Sixes,
+        Chance,
+        LargeStraight
     }
 }
