@@ -29,7 +29,17 @@ namespace Tests
         [Fact]
         public void Be_Able_To_Choose_Score()
         {
-            Assert.True(false);
+            // arrance
+            var dices = new Dice[] { new Dice(1), new Dice(1), new Dice(1), new Dice(1), new Dice(1) };
+            Roll roll = new Roll(dices);
+            var mockDiceLauncher = new Mock<IDiceLauncher>();
+            var player = new Player(mockDiceLauncher.Object);
+
+            // act
+            player.ChooseScore(roll,Combination.Yahtzee);
+
+            // assert
+            player.TotalScore.Should().Be(50);
         } 
     }
 }
