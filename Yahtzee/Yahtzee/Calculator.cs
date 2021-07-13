@@ -26,15 +26,23 @@ namespace Yahtzee
                 Combination.Chance => dicesValues.Sum(),
                 Combination.LargeStraight => IsLargeStraight(dicesValues) ? 40 : 0,
                 Combination.SmallStraight => IsSmallStraight(dicesValues) ? 30 : 0,
-                Combination.Yahtzee => dicesValues.Count(x => x == dicesValues[0]) == 5 ? 50 : 0,
-                Combination.Square => HasFourOccurrences(dicesValues) ? dicesValues.Sum():0,
+                Combination.Yahtzee => HasGivenOccurrences(dicesValues, 5) ? 50 : 0,
+                Combination.Square => HasGivenOccurrences(dicesValues, 4) ? dicesValues.Sum():0,
+                Combination.ThreeOfAKind => HasGivenOccurrences(dicesValues,3) ? dicesValues.Sum() : 0,
+                Combination.FullHouse => IsFullHouse(dicesValues) ? 25 : 0,
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        private bool HasFourOccurrences(int[] dicesValues)
+        private bool IsFullHouse(int[] dicesValues)
         {
-            return dicesValues.GroupBy(x=>x).Any(x=>x.Count()>=4);
+            return HasGivenOccurrences(dicesValues,5) 
+                   || (dicesValues.GroupBy(x => x).Any(x => x.Count() == 3) && dicesValues.Distinct().Count() == 2);
+        }
+
+        private bool HasGivenOccurrences(int[] dicesValues, int numberOfOccurrences)
+        {
+            return dicesValues.GroupBy(x => x).Any(x => x.Count() >= numberOfOccurrences);
         }
 
         private bool IsSmallStraight(int[] dicesValues)

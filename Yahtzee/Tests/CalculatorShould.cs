@@ -55,6 +55,17 @@ namespace Tests
         [InlineData(1, 1, 1, 1, 2, Combination.Square, 6)]
         [InlineData(1, 1, 2, 3, 2, Combination.Square, 0)]
         [InlineData(1, 1, 1, 2, 2, Combination.Square, 0)]
+        [InlineData(1, 1, 1, 1, 1, Combination.Square, 5)]
+        [InlineData(1, 1, 1, 3, 2, Combination.ThreeOfAKind, 8)]
+        [InlineData(5, 5, 5, 3, 2, Combination.ThreeOfAKind, 20)]
+        [InlineData(5, 5, 5, 5, 2, Combination.ThreeOfAKind, 22)]
+        [InlineData(5, 5, 5, 5, 5, Combination.ThreeOfAKind, 25)]
+        [InlineData(5, 5, 1, 3, 2, Combination.ThreeOfAKind, 0)]
+        [InlineData(5, 5, 5, 3, 3, Combination.FullHouse, 25)]
+        [InlineData(5, 5, 1, 3, 3, Combination.FullHouse, 0)]
+        [InlineData(5, 5, 5, 2, 3, Combination.FullHouse, 0)]
+        [InlineData(6, 6, 6, 6, 6, Combination.FullHouse, 25)]
+        [InlineData(6, 6, 6, 6, 1, Combination.FullHouse, 0)]
         public void Calculate_Given_Roll_For_Combination_The_Expected_Score(int dice1, int dice2, int dice3, int dice4,
             int dice5, Combination combination, int expectedScore)
         {

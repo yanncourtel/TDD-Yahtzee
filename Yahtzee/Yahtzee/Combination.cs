@@ -12,6 +12,8 @@ namespace Yahtzee
         LargeStraight,
         SmallStraight,
         Yahtzee,
-        Square
+        Square,
+        ThreeOfAKind,
+        FullHouse
     }
 }
