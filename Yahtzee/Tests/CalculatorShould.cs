@@ -43,6 +43,8 @@ namespace Tests
         [InlineData(1, 1, 1, 1, 6, Combination.Sixes, 6)]
         [InlineData(1, 1, 1, 1, 6, Combination.Chance, 10)]
         [InlineData(1, 2, 3, 4, 5, Combination.LargeStraight, 40)]
+        [InlineData(1, 2, 3, 4, 6, Combination.LargeStraight, 0)]
+        [InlineData(2, 6, 3, 4, 5, Combination.LargeStraight, 40)]
         public void Calculate_Given_Roll_For_Combination_The_Expected_Score(int dice1, int dice2, int dice3, int dice4,
             int dice5, Combination combination, int expectedScore)
         {
